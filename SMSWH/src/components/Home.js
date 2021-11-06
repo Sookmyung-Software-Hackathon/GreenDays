@@ -18,21 +18,21 @@ const Home = ({navigation}) =>{
                     <TouchableOpacity style={styles.Button} onPress={() => {navigation.navigate('NaturalItems');}}>
                         <Text style={styles.ButtonText}>천연 용품 사용</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.Button}>
+                    <TouchableOpacity style={styles.Button} onPress={() => {navigation.navigate('MultiUseItems');}}>
                         <Text style={styles.ButtonText}>다회용품 사용</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.Button}>
+                    <TouchableOpacity style={styles.Button} onPress={() => {navigation.navigate('FoodWaste');}}>
                         <Text style={styles.ButtonText}>음식물 쓰레기 {"\n"}줄이기</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.ButtonView}>
-                    <TouchableOpacity style={styles.Button}>
+                    <TouchableOpacity style={styles.Button} onPress={() => {navigation.navigate('Tumbler');}}>
                         <Text style={styles.ButtonText}>텀블러 사용</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.Button}>
+                    <TouchableOpacity style={styles.Button} onPress={() => {navigation.navigate('Bag');}}>
                         <Text style={styles.ButtonText}>장바구니 사용</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.Button}>
+                    <TouchableOpacity style={styles.Button} onPress={() => {navigation.navigate('Transportation');}}>
                         <Text style={styles.ButtonText}>대중교통 이용</Text>
                     </TouchableOpacity>
                 </View>

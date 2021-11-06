@@ -3,12 +3,27 @@ import { useState } from 'react';
 import {View,Text,StyleSheet,Button,SafeAreaView,TouchableOpacity, Alert} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { TextInput, TouchableHighlight } from 'react-native-gesture-handler';
+import auth from '@react-native-firebase/auth';
+
+
 
 function signup({navigation}){
   
     const [userEmail,setuserEmail] = useState('');
     const [userPassword,setuserPassword] = useState('');
     const [confirmPassword,setconfirmPassword]= useState('');
+
+    const signUpFunc = () =>{
+        auth()
+        .createUserWithEmailAndPassword(userEmail, userPassword)
+        .then( ()=>{
+            console.log('User account created');
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+    }
+    
     return(
     <SafeAreaView style = {signupstyle.fullscreen}>
         <View style = {signupstyle.all}>
@@ -44,7 +59,7 @@ function signup({navigation}){
 
               />
           </View>
-          <TouchableOpacity style = {signupstyle.button}>
+          <TouchableOpacity style = {signupstyle.button} onPress={signUpFunc}>
               <Text style = {signupstyle.buttontext}>
                   등록
               </Text>
