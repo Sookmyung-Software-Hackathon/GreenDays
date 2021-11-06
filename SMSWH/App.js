@@ -3,18 +3,40 @@ import Fontawesome from 'react-native-vector-icons/FontAwesome';
  //import {SafeAreaView, Text} from 'react-native';
  import {NavigationContainer} from '@react-navigation/native'
 // import { createStackNavigator } from '@react-navigation/stack';
-import Home  from './src/components/Home';
-import signin from './src/components/signin';
-import signup from './src/components/signup';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import {createStackNavigator} from '@react-navigation/stack'
- //const Stack = createStackNavigator();
-   
+
+import Home  from './src/components/Home'; 
+import NaturalItems from './src/components/NaturalItems';
+import MultiUseItems from './src/components/MultiUseItems';
+import FoodWaste from './src/components/FoodWaste';
+import Tumbler from './src/components/Tumbler';
+import Bag from './src/components/Bag';
+import Transportation from './src/components/Transportation';
+
+import signin from './src/components/signin';
+import signup from './src/components/signup';
+
 const Tabs = createBottomTabNavigator();
 
 const homeStackNavigation = createStackNavigator();
 const signStackNavigation = createStackNavigator();
+
+HomeStackScreen = ()=>{
+  return(
+    <homeStackNavigation.Navigator screenOptions = {({route})=>({headerShown:false})}>
+      <homeStackNavigation.Screen  name="Home" component={Home}/>
+      <homeStackNavigation.Screen name="NaturalItems" component={NaturalItems}/>
+      <homeStackNavigation.Screen name="MultiUseItems" component={MultiUseItems}/>
+      <homeStackNavigation.Screen name="FoodWaste" component={FoodWaste}/>
+      <homeStackNavigation.Screen name="Tumbler" component={Tumbler}/>
+      <homeStackNavigation.Screen name="Bag" component={Bag}/>
+      <homeStackNavigation.Screen name="Transportation" component={Transportation}/>
+    </homeStackNavigation.Navigator>
+  )
+}
+
 signStackscreen = () =>{
   return (
     <signStackNavigation.Navigator screenOptions = {({route})=>({headerShown:false})}>
@@ -22,13 +44,6 @@ signStackscreen = () =>{
       <signStackNavigation.Screen name = "signup" component={signup}/>
      
     </signStackNavigation.Navigator>
-  )
-}
-HomeStackScreen = ()=>{
-  return(
-    <homeStackNavigation.Navigator screenOptions = {({route})=>({headerShown:false})}>
-      <homeStackNavigation.Screen name="home" component={Home}/>
-    </homeStackNavigation.Navigator>
   )
 }
 class App extends React.Component{
@@ -59,10 +74,9 @@ class App extends React.Component{
         
         
         >
+
           <Tabs.Screen name = 'sign' component ={signStackscreen}/>
           <Tabs.Screen name = "HomeStack" component={HomeStackScreen}/>
-        
-        
         </Tabs.Navigator>
       </NavigationContainer>
     )
