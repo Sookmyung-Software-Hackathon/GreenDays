@@ -1,8 +1,9 @@
- import Fontawesome from 'react-native-vector-icons/FontAwesome';
+import Fontawesome from 'react-native-vector-icons/FontAwesome';
  import React from 'react';
  //import {SafeAreaView, Text} from 'react-native';
  import {NavigationContainer} from '@react-navigation/native'
 // import { createStackNavigator } from '@react-navigation/stack';
+
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import {createStackNavigator} from '@react-navigation/stack'
 
@@ -14,9 +15,14 @@ import Tumbler from './src/components/Tumbler';
 import Bag from './src/components/Bag';
 import Transportation from './src/components/Transportation';
 
+import signin from './src/components/signin';
+import signup from './src/components/signup';
+
 const Tabs = createBottomTabNavigator();
 
 const homeStackNavigation = createStackNavigator();
+const signStackNavigation = createStackNavigator();
+
 HomeStackScreen = ()=>{
   return(
     <homeStackNavigation.Navigator screenOptions = {({route})=>({headerShown:false})}>
@@ -28,6 +34,16 @@ HomeStackScreen = ()=>{
       <homeStackNavigation.Screen name="Bag" component={Bag}/>
       <homeStackNavigation.Screen name="Transportation" component={Transportation}/>
     </homeStackNavigation.Navigator>
+  )
+}
+
+signStackscreen = () =>{
+  return (
+    <signStackNavigation.Navigator screenOptions = {({route})=>({headerShown:false})}>
+      <signStackNavigation.Screen name = "signin" component={signin}/>
+      <signStackNavigation.Screen name = "signup" component={signup}/>
+     
+    </signStackNavigation.Navigator>
   )
 }
 class App extends React.Component{
@@ -58,7 +74,9 @@ class App extends React.Component{
         
         
         >
-        <Tabs.Screen name = "HomeStack" component={HomeStackScreen}/>
+
+          <Tabs.Screen name = 'sign' component ={signStackscreen}/>
+          <Tabs.Screen name = "HomeStack" component={HomeStackScreen}/>
         </Tabs.Navigator>
       </NavigationContainer>
     )
