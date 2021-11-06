@@ -1,13 +1,33 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {View,Text,StyleSheet,Button,SafeAreaView,TouchableOpacity, Alert} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { TextInput, TouchableHighlight } from 'react-native-gesture-handler';
+import auth from '@react-native-firebase/auth';
+
 
 
 function signin ({navigation}){
     const [userEmail,setuserEmail] = useState('');
     const [userPassword,setuserPassword] = useState('');
+    const [loginFlag, setLoginFlag] = useState(false);
+
+    const signInFunc = ()=>{
+        auth()
+        .signInWithEmailAndPassword(userEmail,userPassword)
+        .then( ()=>{
+            console.log('로그인 성공');
+            console.log(auth());
+            console.log('email : '+auth().email);
+            setLoginFlag(true);
+        })
+        .catch(err=>{
+            console.log(err);
+        })
+    }
+    useEffect( ()=>{
+        navigation.navigate("Home");
+    },[loginFlag]);
 
     return(
         <SafeAreaView style={signinstyle.fullscreen}>
@@ -16,7 +36,7 @@ function signin ({navigation}){
             <Text style={signinstyle.title}>로그인</Text>
             <View style={{flexDirection:'column'}}>
                 <Text style ={{margin:5}}>Email</Text>
-                <TextInput
+                <TextInput 
                     style = {signinstyle.textinput}
                   placeholder="이메일을 입력해주세요"
                    onChange = {(e)=> {
@@ -44,7 +64,7 @@ function signin ({navigation}){
                 </TouchableHighlight>
             </View>
             <View>
-                <TouchableOpacity style = {signinstyle.button}>
+                <TouchableOpacity style = {signinstyle.button} onPress={signInFunc}>
                     <Text style={signinstyle.buttontext}>
                         로그인
                     </Text>

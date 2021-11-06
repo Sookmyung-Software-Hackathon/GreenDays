@@ -14,7 +14,8 @@ import FoodWaste from './src/components/FoodWaste';
 import Tumbler from './src/components/Tumbler';
 import Bag from './src/components/Bag';
 import Transportation from './src/components/Transportation';
-
+import mypage from './src/components/MyPage';
+import ranking from './src/components/Rank';
 import signin from './src/components/signin';
 import signup from './src/components/signup';
 
@@ -26,7 +27,9 @@ const signStackNavigation = createStackNavigator();
 HomeStackScreen = ()=>{
   return(
     <homeStackNavigation.Navigator screenOptions = {({route})=>({headerShown:false})}>
-      <homeStackNavigation.Screen  name="Home" component={Home}/>
+      <homeStackNavigation.Screen name = "signin" component={signin}/>
+      <homeStackNavigation.Screen name = "signup" component={signup}/>
+      <homeStackNavigation.Screen name="Home" component={Home}/>
       <homeStackNavigation.Screen name="NaturalItems" component={NaturalItems}/>
       <homeStackNavigation.Screen name="MultiUseItems" component={MultiUseItems}/>
       <homeStackNavigation.Screen name="FoodWaste" component={FoodWaste}/>
@@ -37,15 +40,15 @@ HomeStackScreen = ()=>{
   )
 }
 
-signStackscreen = () =>{
+/*signStackscreen = () =>{
   return (
     <signStackNavigation.Navigator screenOptions = {({route})=>({headerShown:false})}>
       <signStackNavigation.Screen name = "signin" component={signin}/>
       <signStackNavigation.Screen name = "signup" component={signup}/>
-     
+      <signStackNavigation.Screen name="Home" component={Home}/>
     </signStackNavigation.Navigator>
   )
-}
+}*/
 class App extends React.Component{
   render(){
     return(
@@ -74,9 +77,10 @@ class App extends React.Component{
         
         
         >
-
-          <Tabs.Screen name = 'sign' component ={signStackscreen}/>
           <Tabs.Screen name = "HomeStack" component={HomeStackScreen}/>
+          <Tabs.Screen name = "Ranking" component={ranking}/>
+          
+          <Tabs.Screen name = "mypage" component={mypage}/>
         </Tabs.Navigator>
       </NavigationContainer>
     )

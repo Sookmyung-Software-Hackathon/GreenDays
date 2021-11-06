@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { SafeAreaView ,Text, View, Button, StyleSheet,TouchableOpacity} from 'react-native';
-import { Calendar, CaldendarList, Agenda } from 'react-native-calendars';
+import Cal from './Calendar';
 
 const NaturalItems = ({navigation})=>{
     const [monthCount, setMonthCount] = useState(0);
@@ -14,13 +14,7 @@ const NaturalItems = ({navigation})=>{
             </View>
             <View style={styles.BottomView}>
                 <View style={styles.CaldendarView}>
-                    <Calendar
-                        current = {Date()}
-                        onDayPress={(day)=>{console.log('selected day', day);}}
-                        monthFormat = {Date().toString('yyyy MM')}
-                        onMonthChange={(month)=>{console.log('month changed', month);}}
-                        renderHeader={(date) => {/*Return JSX*/}}
-                    />
+                    <Cal/>
                 </View>
                 <View style={{alignItems:'center'}}>
                     <TouchableOpacity onPress={()=>navigation.goBack()}>
@@ -51,7 +45,9 @@ const styles = StyleSheet.create({
     },
     CaldendarView : {
         paddingTop : 30,
-        paddingBottom:30
+        paddingBottom:30,
+        
+
     }
 })
 
