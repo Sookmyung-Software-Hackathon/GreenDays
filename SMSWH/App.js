@@ -77,6 +77,7 @@ class App extends React.Component{
         
         
         >
+
           <Tabs.Screen name = "HomeStack" component={HomeStackScreen}/>
           <Tabs.Screen name = "Ranking" component={ranking}/>
           

@@ -27,15 +27,19 @@ const Home = ({navigation}) =>{
                         <Text style={styles.ButtonText}>천연 용품 사용</Text>
                         
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.Button}>
+
+                    <TouchableOpacity style={styles.Button} onPress={() => {navigation.navigate('MultiUseItems');}}>
                         <Image 
                             style={[styles.Imagestyle,{top:-20,marginBottom:-10}]}
                             source={require('../assets/images/multiuse.png')}
                         />
+
+
                         <Text style={styles.ButtonText}>다회용품 사용</Text>
                         
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.Button}>
+
+                    <TouchableOpacity style={styles.Button} onPress={() => {navigation.navigate('FoodWaste');}}>
                         <Image 
                             style={{top:-20,marginBottom:-15,width:83,height:75}}
                             source={require('../assets/images/foodwaste.png')}
@@ -44,25 +48,26 @@ const Home = ({navigation}) =>{
                     </TouchableOpacity>
                 </View>
                 <View style={styles.ButtonView}>
-                    <TouchableOpacity style={styles.Button}>
+                    <TouchableOpacity style={styles.Button} onPress={() => {navigation.navigate('Tumbler');}}>
                         <Image 
                             style={{top:-20,marginBottom:-15,width:40,height:75}}
                             source={require('../assets/images/tumbler.png')}
                         />
                         <Text style={styles.ButtonText}>텀블러 사용</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.Button}>
+                    <TouchableOpacity style={styles.Button} onPress={() => {navigation.navigate('Bag');}}>
                          <Image 
                             style={{width:50,height:70,top:-20}}
                             source={require('../assets/images/bag.png')}
                         />
                         <Text style={styles.ButtonText}>장바구니 사용</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.Button}>
+                    <TouchableOpacity style={styles.Button} onPress={() => {navigation.navigate('Transportation');}}>
                       <Image 
                             style={{top:-10,width:100,height:55}}
                             source={require('../assets/images/transfortation.png')}
                         />
+
                         <Text style={styles.ButtonText}>대중교통 이용</Text>
                     </TouchableOpacity>
                 </View>
