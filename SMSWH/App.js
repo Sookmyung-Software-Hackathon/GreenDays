@@ -1,14 +1,35 @@
  import Fontawesome from 'react-native-vector-icons/FontAwesome';
  import React from 'react';
- import {SafeAreaView, Text} from 'react-native';
+ //import {SafeAreaView, Text} from 'react-native';
  import {NavigationContainer} from '@react-navigation/native'
- import { createStackNavigator } from '@react-navigation/stack';
- import Home from './src/components/Home';
- import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
- const Stack = createStackNavigator();
- 
- const Tabs = createBottomTabNavigator();
+// import { createStackNavigator } from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
+import {createStackNavigator} from '@react-navigation/stack'
 
+import Home  from './src/components/Home'; 
+import NaturalItems from './src/components/NaturalItems';
+import MultiUseItems from './src/components/MultiUseItems';
+import FoodWaste from './src/components/FoodWaste';
+import Tumbler from './src/components/Tumbler';
+import Bag from './src/components/Bag';
+import Transportation from './src/components/Transportation';
+
+const Tabs = createBottomTabNavigator();
+
+const homeStackNavigation = createStackNavigator();
+HomeStackScreen = ()=>{
+  return(
+    <homeStackNavigation.Navigator screenOptions = {({route})=>({headerShown:false})}>
+      <homeStackNavigation.Screen  name="Home" component={Home}/>
+      <homeStackNavigation.Screen name="NaturalItems" component={NaturalItems}/>
+      <homeStackNavigation.Screen name="MultiUseItems" component={MultiUseItems}/>
+      <homeStackNavigation.Screen name="FoodWaste" component={FoodWaste}/>
+      <homeStackNavigation.Screen name="Tumbler" component={Tumbler}/>
+      <homeStackNavigation.Screen name="Bag" component={Bag}/>
+      <homeStackNavigation.Screen name="Transportation" component={Transportation}/>
+    </homeStackNavigation.Navigator>
+  )
+}
 class App extends React.Component{
   render(){
     return(
@@ -19,7 +40,7 @@ class App extends React.Component{
               let iconName;
               if(route.name =='Ranking'){
                 iconName = 'home'
-              }else if (route.name == 'Home'){
+              }else if (route.name == 'HomeStack'){
                iconName= 'comment'
               }
               else if(route.name == 'mypage'){
@@ -37,9 +58,8 @@ class App extends React.Component{
         
         
         >
-        <Tabs.Screen name = "Home" component={Home}/>
+        <Tabs.Screen name = "HomeStack" component={HomeStackScreen}/>
         </Tabs.Navigator>
-      
       </NavigationContainer>
     )
   }
