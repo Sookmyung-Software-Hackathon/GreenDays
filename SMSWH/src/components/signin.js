@@ -18,7 +18,9 @@ function signin ({navigation}){
         .then( ()=>{
             console.log('로그인 성공');
             console.log(auth());
+
             console.log('email : '+auth().currentUser.email);
+
             setLoginFlag(true);
         })
         .catch(err=>{

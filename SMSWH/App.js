@@ -14,7 +14,8 @@ import FoodWaste from './src/components/FoodWaste';
 import Tumbler from './src/components/Tumbler';
 import Bag from './src/components/Bag';
 import Transportation from './src/components/Transportation';
-
+import mypage from './src/components/MyPage';
+import ranking from './src/components/Rank';
 import signin from './src/components/signin';
 import signup from './src/components/signup';
 
@@ -77,8 +78,10 @@ class App extends React.Component{
         
         >
 
-          <Tabs.Screen name = 'sign' component ={HomeStackScreen}/>
           <Tabs.Screen name = "HomeStack" component={HomeStackScreen}/>
+          <Tabs.Screen name = "Ranking" component={ranking}/>
+          
+          <Tabs.Screen name = "mypage" component={mypage}/>
         </Tabs.Navigator>
       </NavigationContainer>
     )
