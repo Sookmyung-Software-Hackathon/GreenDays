@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { SafeAreaView ,Text, View, Button, StyleSheet,TouchableOpacity} from 'react-native';
+import { SafeAreaView ,Text, View, Image,Button, StyleSheet,TouchableOpacity} from 'react-native';
 import { Calendar, CaldendarList, Agenda } from 'react-native-calendars';
 import { InsertData} from '../db';
 import auth from '@react-native-firebase/auth';
@@ -36,21 +36,39 @@ const FoodWaste = ({navigation})=>{
                 </Text>
             </View>
             <View style={styles.BottomView}>
-                <View style={styles.CaldendarView}>
-                    <Calendar
-                        current = {Date()}
-                        onDayPress={(day)=>{console.log('selected day', day);}}
-                        monthFormat = {Date().toString('yyyy MM')}
-                        onMonthChange={(month)=>{console.log('month changed', month);}}
-                        renderHeader={(date) => {/*Return JSX*/}}
-                    />
-                </View>
+                
                 <View style={{alignItems:'center'}}>
-                    <TouchableOpacity onPress={()=>{InsertData('음식물',auth().currentUser.email,today)}}>
-                        <Text>Insert</Text>
+                
+                <Calendar
+                   style = {styles.CaldendarView}
+                   current = {Date()}
+                   monthFormat = {'yyyy MM'}
+                    onMonthChange={(month)=>{console.log('month changed', month);}}
+                   renderHeader={(date) => {/*Return JSX*/}}
+                     theme={{
+                      calendarBackground:'white',
+                      selectedDayTextColor:'red',
+                      dayTextColor:'black',
+                     monthTextColor:'black',
+                    textMonthFontWeight:'bold'
+                         
+                      }}
+
+                  />
+                  
+                    <TouchableOpacity style = {{flexDirection:'column',position:'absolute',top:15}}onPress={()=>{InsertData('음식물',auth().currentUser.email,today)}}>
+                        <Image 
+                            style={{left:10,top:150,width:350,height:350}}
+                            source={require('../assets/images/greenee.png')}
+                        />
+                        
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=>navigation.goBack()}>
-                        <Text>Back</Text>
+                    <Text style = {{fontSize:20,height:35, position:'absolute',top:400}}>
+                            오늘 했으면 나를 눌러주세요 !
+                        </Text>
+                    
+                    <TouchableOpacity style = {[{position:'absolute',top:420},styles.button]}  onPress={()=>navigation.goBack() }>
+                        <Text style = {{fontSize:25}}>Back</Text>
                     </TouchableOpacity>
                 </View>
                 
@@ -74,10 +92,20 @@ const styles = StyleSheet.create({
     },
     BottomView : {
         flex : 2,
+        backgroundColor:'white'
     },
     CaldendarView : {
-        paddingTop : 30,
-        paddingBottom:30
+        top:-40,
+        height:70,
+        width:400,
+    },
+    button:{
+        width:200,
+        height:35,
+        backgroundColor:"#FEF5ED",
+        alignItems:'center',
+        margin:10,
+        borderRadius:8
     }
 })
 

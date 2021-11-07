@@ -28,8 +28,7 @@ import database from '@react-native-firebase/database';
             }
             return data;
         })
-        //console.log('data : '+data);
-        //return data;
+
     }
 
 export {InsertData, getDataByCategory,data}

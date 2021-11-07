@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     TextStyle : {
         fontSize : 30,
         paddingTop : 60,
-        paddingLeft : 30
+        paddingLeft : 30,
     },
     Button : {
         flex : 1,

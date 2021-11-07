@@ -1,15 +1,35 @@
-import React from 'react';
-import {SafeAreaView,StyleSheet,Text,View} from 'react-native';
+import React, {useState,useEffect} from 'react';
+import {SafeAreaView,StyleSheet,Text,View, TextInput} from 'react-native';
 import Navigator from '../../Navigation';
 import { Image } from 'react-native';
 import { TouchableOpacity } from 'react-native';
 import auth from '@react-native-firebase/auth';
 
-const MyPage = () =>{
+const MyPage = ({navigation}) =>{
+    const [flag, setFlag] = useState(false);
+
+    useEffect( ()=>{
+        setFlag((auth().currentUser!=null) ? true : false);
+    },[auth().currentUser])
+
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("로그인");
+
     const Signout = ()=>{
-        auth().signOut().then( ()=> console.log('로그아웃 성공'))
-        .catch(err =>{console.log(err);})
+        auth().signOut()
+        .then( ()=> {
+            console.log('로그아웃 성공');
+            navigation.navigate('signin');
+        })
+        .catch(err =>{console.log(err);});
     }
+    
+    useEffect( ()=>{
+        if(auth().currentUser!=null){
+            setEmail(auth().currentUser.email);
+        }
+        else setEmail('로그인 후 이용해주세요');
+    },[auth().currentUser]);
     return(
         <SafeAreaView  style={{flex:1}}>
            <View style={userstyle.TobView}>
@@ -20,14 +40,22 @@ const MyPage = () =>{
                     style={userstyle.imagestyle}
                     source = {require('../assets/images/IMG_0467.jpg')}
                 />
+                <Image
+                    style = {{position:'relative',top:-80,width:360,height:180}}
+                    source={require('../assets/images/greenee2.png')}
+                />
                 <View >
-               <Text style={{fontSize:20,top:200}}>내 이메일 정보</Text>
-               <TouchableOpacity style={userstyle.buttonstyle}>
-                   <Text style={userstyle.textstyle}>비밀번호 변경</Text>
-               </TouchableOpacity>
-               <TouchableOpacity style={userstyle.buttonstyle} onPress={Signout}>
-                   <Text style={userstyle.textstyle}>로그아웃</Text>
-               </TouchableOpacity>
+               <Text style={{fontSize:20,top:0}}>{email}</Text>
+ 
+               { flag? 
+                    <TouchableOpacity style={userstyle.buttonstyle} onPress={Signout}>
+                        <Text style={userstyle.textstyle}>로그아웃</Text>
+                    </TouchableOpacity>:
+                    <TouchableOpacity style={userstyle.buttonstyle} onPress={()=>{navigation.navigate('signin')}}>
+                    <Text style={userstyle.textstyle}>로그인</Text>
+                </TouchableOpacity>
+               
+               }
                 </View>
 
            </View>
@@ -44,6 +72,7 @@ const userstyle = StyleSheet.create({
     },
     title:{
         fontSize:25,
+        marginTop:40
 
     },
     imagestyle:{
@@ -66,7 +95,7 @@ const userstyle = StyleSheet.create({
         alignItems:'center',
         margin:10,
         borderRadius:8,
-        top:270
+        top:30
 
     }
 

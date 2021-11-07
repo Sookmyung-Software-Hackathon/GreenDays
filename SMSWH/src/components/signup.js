@@ -4,6 +4,7 @@ import {View,Text,StyleSheet,Button,SafeAreaView,TouchableOpacity, Alert} from '
 import { NavigationContainer } from '@react-navigation/native';
 import { TextInput, TouchableHighlight } from 'react-native-gesture-handler';
 import auth from '@react-native-firebase/auth';
+import database from '@react-native-firebase/database'
 
 
 
@@ -18,6 +19,11 @@ function signup({navigation}){
         .createUserWithEmailAndPassword(userEmail, userPassword)
         .then( ()=>{
             console.log('User account created');
+            database().ref().child("Database").child("users").push({
+                user : userEmail
+            }).then(console.log('사용자 정보 추가 완료'))
+            Alert.alert("회원가입 완료!");
+            navigation.navigate('signin');
         })
         .catch(err=>{
             console.log(err);
@@ -47,7 +53,7 @@ function signup({navigation}){
                     const {eventCount,target,text}=e.nativeEvent;
                     setuserPassword(text);
                 }}
-
+                secureTextEntry={true}
               />
               <TextInput  
                 style = {signupstyle.textinput}
@@ -56,7 +62,7 @@ function signup({navigation}){
                     const {eventCount,target,text}=e.nativeEvent;
                     setconfirmPassword(text);
                 }}
-
+                secureTextEntry={true}
               />
           </View>
           <TouchableOpacity style = {signupstyle.button} onPress={signUpFunc}>
@@ -87,9 +93,6 @@ signupstyle = StyleSheet.create({
         fontSize :40,
         margin:10,
         marginBottom:20
-
-        
-       
 
     },
     subtitle:{

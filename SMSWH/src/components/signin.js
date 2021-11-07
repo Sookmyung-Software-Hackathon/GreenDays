@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import {View,Text,StyleSheet,Button,SafeAreaView,TouchableOpacity, Alert} from 'react-native';
+import {View,Text,StyleSheet,Button,SafeAreaView,TouchableOpacity, Alert,Image} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { TextInput, TouchableHighlight } from 'react-native-gesture-handler';
 import auth from '@react-native-firebase/auth';
@@ -8,6 +8,7 @@ import auth from '@react-native-firebase/auth';
 
 
 function signin ({navigation}){
+    
     const [userEmail,setuserEmail] = useState('');
     const [userPassword,setuserPassword] = useState('');
     const [loginFlag, setLoginFlag] = useState(false);
@@ -17,24 +18,28 @@ function signin ({navigation}){
         .signInWithEmailAndPassword(userEmail,userPassword)
         .then( ()=>{
             console.log('로그인 성공');
-            console.log(auth());
-
             console.log('email : '+auth().currentUser.email);
 
             setLoginFlag(true);
+            navigation.navigate('myPage');
         })
         .catch(err=>{
             console.log(err);
-        })
+            
+        }) 
     }
+/*
     useEffect( ()=>{
-        navigation.navigate("Home");
-    },[loginFlag]);
-
+        navigation.navigate('mypage');
+    },[]);
+*/
     return(
         <SafeAreaView style={signinstyle.fullscreen}>
         <View  style = {signinstyle.all}>
-            
+            <Image
+                style = {{position:'absolute',width:500,height:500,top:-350}}
+                source ={require('../assets/images/greenee.png')}
+            />
             <Text style={signinstyle.title}>로그인</Text>
             <View style={{flexDirection:'column'}}>
                 <Text style ={{margin:5}}>Email</Text>
@@ -56,6 +61,7 @@ function signin ({navigation}){
                      const {eventCount,target,text} = e.nativeEvent;
                         setuserPassword(text);
                     }}
+                    secureTextEntry={true}
                 />
             </View>
             <View>
@@ -101,11 +107,7 @@ signinstyle = StyleSheet.create({
         
         fontSize :40,
         margin:10,
-        marginBottom:20
-
-        
-       
-
+        marginBottom:20,
     },
     subtitle:{
         fontsize:40,

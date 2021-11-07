@@ -1,5 +1,5 @@
 import Fontawesome from 'react-native-vector-icons/FontAwesome';
- import React from 'react';
+ import React, { useEffect, useState } from 'react';
  //import {SafeAreaView, Text} from 'react-native';
  import {NavigationContainer} from '@react-navigation/native'
 // import { createStackNavigator } from '@react-navigation/stack';
@@ -18,39 +18,60 @@ import mypage from './src/components/MyPage';
 import ranking from './src/components/Rank';
 import signin from './src/components/signin';
 import signup from './src/components/signup';
+import auth from '@react-native-firebase/auth';
 
-const Tabs = createBottomTabNavigator();
+
+
+
 
 const homeStackNavigation = createStackNavigator();
 const signStackNavigation = createStackNavigator();
-
+const flag= false;
 HomeStackScreen = ()=>{
+  
+   
+
   return(
-    <homeStackNavigation.Navigator screenOptions = {({route})=>({headerShown:false})}>
-      <homeStackNavigation.Screen name = "signin" component={signin}/>
-      <homeStackNavigation.Screen name = "signup" component={signup}/>
-      <homeStackNavigation.Screen name="Home" component={Home}/>
+    
+     <homeStackNavigation.Navigator screenOptions = {({route})=>({headerShown:false})}>
+
+      
+         <homeStackNavigation.Screen name="Home" component={Home}/>
       <homeStackNavigation.Screen name="NaturalItems" component={NaturalItems}/>
       <homeStackNavigation.Screen name="MultiUseItems" component={MultiUseItems}/>
       <homeStackNavigation.Screen name="FoodWaste" component={FoodWaste}/>
       <homeStackNavigation.Screen name="Tumbler" component={Tumbler}/>
       <homeStackNavigation.Screen name="Bag" component={Bag}/>
       <homeStackNavigation.Screen name="Transportation" component={Transportation}/>
+        
     </homeStackNavigation.Navigator>
   )
+  
+  
 }
+ signStackScreen =()=>{
+  
+    
+  return(
+  <signStackNavigation.Navigator screenOptions = {({route})=>({headerShown:false})}>
 
-/*signStackscreen = () =>{
-  return (
-    <signStackNavigation.Navigator screenOptions = {({route})=>({headerShown:false})}>
       <signStackNavigation.Screen name = "signin" component={signin}/>
-      <signStackNavigation.Screen name = "signup" component={signup}/>
-      <signStackNavigation.Screen name="Home" component={Home}/>
-    </signStackNavigation.Navigator>
+      <signStackNavigation.Screen name = "signup" component={signup}/> 
+      <signStackNavigation.Screen name = "myPage" component={mypage}/> 
+
+      
+  </signStackNavigation.Navigator>
   )
-}*/
-class App extends React.Component{
-  render(){
+  
+  }
+const Tabs = createBottomTabNavigator(
+);
+
+const checkauth=false;
+
+function App (){
+  
+  
     return(
       <NavigationContainer>
         <Tabs.Navigator
@@ -58,33 +79,33 @@ class App extends React.Component{
             tabBarIcon : ({focused,color,size})=>{
               let iconName;
               if(route.name =='Ranking'){
-                iconName = 'home'
+                iconName = 'line-chart'
               }else if (route.name == 'HomeStack'){
-               iconName= 'comment'
+               iconName= 'home'
               }
               else if(route.name == 'mypage'){
-                iconName ='user-o'
+                iconName ='user'
               }
               return <Fontawesome name = {iconName} size={size} color={color}/>;
             },
-            tabBarInactiveTintColor :'black',
-            tabBarActiveTintColor:'#99A799',
+            tabBarInactiveTintColor :'gray',
+            tabBarActiveTintColor :'black',
+           
             tabBarStyle :{
               backgroundColor:'white'
             },
             headerShown:false
           })}
-        
-        
         >
+          <Tabs.Screen name = "mypage" component={signStackScreen}/>
+        <Tabs.Screen name = "HomeStack" component={HomeStackScreen}/>
 
-          <Tabs.Screen name = "HomeStack" component={HomeStackScreen}/>
           <Tabs.Screen name = "Ranking" component={ranking}/>
           
-          <Tabs.Screen name = "mypage" component={mypage}/>
+          
         </Tabs.Navigator>
       </NavigationContainer>
     )
-  }
+  
 }
  export default App;
