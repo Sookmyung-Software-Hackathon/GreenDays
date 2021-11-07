@@ -5,7 +5,6 @@ import { Calendar, CaldendarList, Agenda } from 'react-native-calendars';
 import { InsertData} from '../db';
 import auth from '@react-native-firebase/auth';
 import database from '@react-native-firebase/database';
-import Cal from './Calendar';
 import {Table,TableWrapper,Row,Rows,Col,Cols,Cell} from 'react-native-table-component';
 
 
